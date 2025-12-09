@@ -1,0 +1,344 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#root {
+  background-color: black;
+}
+/* Custom Fonts */
+@font-face {
+  font-family: "SkModernist";
+  src: url("./fonts/SkModernist-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SkModernist";
+  src: url("./fonts/SkModernist-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* RUF XP Space Theme Design System - All colors MUST be HSL */
+
+@layer base {
+  :root {
+    /* Space Theme Colors */
+    --background: 240 10% 3%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 5%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 5%;
+    --popover-foreground: 0 0% 98%;
+
+    /* RUF XP White Theme */
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
+    --primary-glow: 0 0% 90%;
+
+    --secondary: 270 50% 40%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 10% 10%;
+    --muted-foreground: 240 5% 60%;
+
+    --accent: 300 100% 50%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 20% 20%;
+    --input: 240 20% 15%;
+    --ring: 0 0% 100%;
+
+    /* Space Theme Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(0 0% 100%), hsl(0 0% 90%));
+    --gradient-space: linear-gradient(180deg, hsl(240 10% 3%), hsl(240 15% 8%));
+    --gradient-rocket: linear-gradient(45deg, hsl(0 0% 100%), hsl(0 0% 80%));
+    --gradient-glow: radial-gradient(circle, hsl(0 0% 100% / 0.3), transparent);
+
+    /* Space Shadows & Effects */
+    --shadow-glow: 0 0 40px hsl(0 0% 100% / 0.5);
+    --shadow-intense: 0 0 60px hsl(0 0% 100% / 0.7);
+    --shadow-card: 0 10px 30px hsl(240 10% 3% / 0.8);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-glow: box-shadow 0.3s ease-out;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  /* Dark mode inherits space theme - no changes needed */
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "SkModernist", sans-serif;
+    background: linear-gradient(180deg, hsl(240 10% 3%), hsl(240 15% 8%));
+    min-height: 100vh;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    font-size: 18px; /* increase rem base so all text-sm/text-lg look bolder */
+  }
+
+  /* Space Theme Typography */
+  .text-glow {
+    text-shadow: 0 0 20px hsl(0 0% 100% / 0.8);
+  }
+
+  .text-mission {
+    font-family: "SkModernist", sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+  }
+
+  /* Glowing Effects */
+  .glow-white {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .glow-intense {
+    box-shadow: var(--shadow-intense);
+  }
+
+  /* Space Animations */
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite alternate;
+  }
+
+  /* Custom Keyframes */
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  @keyframes pulse-glow {
+    0% {
+      box-shadow: 0 0 20px hsl(0 0% 100% / 0.4);
+    }
+    100% {
+      box-shadow: 0 0 40px hsl(0 0% 100% / 0.8);
+    }
+  }
+
+  @keyframes rocket-launch {
+    0% {
+      transform: translateY(100px) scale(0.8);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+  }
+
+  .rocket-launch {
+    animation: rocket-launch 1s ease-out;
+  }
+
+  /* Header Hover Effects */
+  .header-link {
+    @apply block text-white transition-colors duration-300 text-sm;
+  }
+
+  .header-link:hover {
+    @apply text-white;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  }
+
+  /* Parallax Scrolling Effects */
+  .parallax-bg {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  .parallax-content {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  body {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+
+  /* Mobile-first responsive improvements */
+  @media (max-width: 640px) {
+    /* Reduce padding on mobile */
+    .container {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    /* Improve text readability on mobile */
+    body {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    html {
+      font-size: 17px; /* slightly smaller on mobile but still larger than default */
+    }
+
+    /* Better touch targets */
+    button,
+    a {
+      min-height: 44px;
+      min-width: 44px;
+    }
+
+    /* Prevent horizontal scroll on mobile */
+    * {
+      max-width: 100%;
+    }
+
+    /* Mobile header improvements */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+    }
+
+    /* Mobile hero section improvements */
+    .hero-mobile {
+      min-height: calc(100vh - 100px);
+      padding-top: 0;
+    }
+  }
+
+  /* Tablet improvements */
+  @media (min-width: 641px) and (max-width: 1024px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    /* Tablet header adjustments */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+    }
+  }
+
+  /* Desktop header */
+  @media (min-width: 1025px) {
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+    }
+  }
+
+  /* Enhanced smooth scrolling */
+  * {
+    scroll-behavior: smooth;
+  }
+
+  /* Smooth scrolling for all scrollable elements */
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+
+  /* Prevent scroll chaining on mobile */
+  .scroll-container {
+    overscroll-behavior: contain;
+  }
+
+  /* Smooth momentum scrolling on iOS */
+  .smooth-scroll {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  /* Ensure all sections allow scrolling but content doesn't interfere */
+  section {
+    pointer-events: auto;
+  }
+
+  /* Prevent content elements from blocking scroll */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  span,
+  div:not([class*="pointer-events"]) {
+    pointer-events: none;
+  }
+
+  /* Allow interactive elements to work */
+  button,
+  a,
+  input,
+  select,
+  textarea,
+  [role="button"] {
+    pointer-events: auto;
+  }
+
+  /* Fix for parallax sections */
+  .parallax-section {
+    pointer-events: auto;
+  }
+
+  /* Parallax layers with different scroll speeds */
+  .parallax-slow {
+    transform: translateY(var(--scroll-slow, 0px));
+  }
+
+  .parallax-fast {
+    transform: translateY(var(--scroll-fast, 0px));
+  }
+}
