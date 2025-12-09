@@ -6,6 +6,7 @@ import { motion } from "motion/react";
 import { Zap, Trophy, Wallet, RefreshCw } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { TELEGRAM_AUTH_URL, getIsAuthenticated, setAuthenticated } from "@/lib/auth";
+import { getApiUrl } from "@/lib/utils";
 
 type Leader = {
   rank: number;
@@ -109,7 +110,7 @@ const XpDashboardSection = () => {
     const fetchUser = async () => {
       try {
         const res = await fetch(
-          `/api/user?external_id=${encodeURIComponent(id)}`,
+          `${getApiUrl()}/api/user?external_id=${encodeURIComponent(id)}`,
           {
             // Avoid 304 / cached responses that break JSON parsing and .ok checks
             cache: "no-store",
@@ -136,7 +137,7 @@ const XpDashboardSection = () => {
 
     const fetchLeaders = async () => {
       try {
-        const res = await fetch("/api/leaderboard", {
+        const res = await fetch(`${getApiUrl()}/api/leaderboard`, {
           cache: "no-store",
         });
 
@@ -220,7 +221,7 @@ const XpDashboardSection = () => {
     setSpinAngle((prev) => prev + extraSpins * 360 + randomOffset);
 
     try {
-      const res = await fetch("/api/spin", {
+      const res = await fetch(`${getApiUrl()}/api/spin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
